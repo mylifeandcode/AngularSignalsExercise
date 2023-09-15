@@ -6,35 +6,33 @@ import { Item } from './item';
 })
 export class ShoppingCartService {
 
-  public itemsInCart: WritableSignal<Item[]> = signal([]);
-  public totalItemQty: Signal<number> = computed(() => this.itemsInCart().length);
-  public totalItemCost: Signal<number> = computed(() => this.itemsInCart().reduce((total, item) => total + (item.cost * item.quantity), 0));
+  public itemsInCart: Item[] = []; //Convert this to a writable signal
+  //Add computed signals here for the total qty and total cost of items in the shopping cart
 
   public addItem(itemToAdd: Item): void {
-    this.itemsInCart.update((value: Item[]) => {
-      const existingIndex = value.findIndex((value: Item) => value.description == itemToAdd.description);
-      if (existingIndex > -1) {
-        value[existingIndex].quantity++
-      }
-      else {
-        value.push(itemToAdd);
-      }
-      return value;
-    });
+
+    const existingIndex = this.itemsInCart.findIndex((value: Item) => value.description == itemToAdd.description);
+    if (existingIndex > -1) {
+      this.itemsInCart[existingIndex].quantity++
+    }
+    else {
+      this.itemsInCart.push(itemToAdd);
+    }
+
   }
 
   public removeItem(itemToRemove: Item): void {
-    this.itemsInCart.update((value: Item[]) => {
-      const existingIndex = value.findIndex((value: Item) => value.description == itemToRemove.description);
-      if (existingIndex > -1) {
-        if(value[existingIndex].quantity == 1) {
-          value.splice(existingIndex, 1);
-        } 
-        else {
-          value[existingIndex].quantity--;
-        }
+
+    const existingIndex = this.itemsInCart.findIndex((value: Item) => value.description == itemToRemove.description);
+    if (existingIndex > -1) {
+      if(this.itemsInCart[existingIndex].quantity == 1) {
+        this.itemsInCart.splice(existingIndex, 1);
+      } 
+      else {
+        this.itemsInCart[existingIndex].quantity--;
       }
-      return value;
-    });
+    }
+  
   }
+
 }

@@ -12,9 +12,7 @@ export class ShoppingCartComponent {
   public checkoutDisabled: boolean = true;
 
   constructor(public shoppingCart: ShoppingCartService) {
-    effect(() => {
-      this.checkoutDisabled = (this.shoppingCart.itemsInCart().length == 0);
-    });
+    //Use an effect here to set checkoutDisabled depending on existence of items in the shopping cart
   }
 
   public checkout(): void {
