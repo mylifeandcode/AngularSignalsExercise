@@ -1,0 +1,17 @@
+<h3>The Basics</h3>
+<ul>
+  <li><b>Signal</b> - a value that can tell Angular when it changes</li>
+  <li><b>Computed</b> - derive new value when one of the dependant signals change</li>
+  <li>
+    <b>Effect</b> - a side-effectful operation which reads the value of zero or more signals. 
+    Automatically scheduled to be re-run whenever any of those signals is notified of a change.
+  </li>
+</ul>
+<h5>More Info</h5>
+<ul>
+  <li>Change detection only runs when the signal tells Angular it has changed.</li>
+  <li>Signals are small: 2kb.</li>
+  <li>Signals are fast.</li>
+  <li>The Angular team is working on interoperablity with existing state management libraries.</li>
+  <li>The plan is for Signals to eventually replace Zone.js, and for Signal-related lifecycle events.</li>
+</ul>
