@@ -7,7 +7,7 @@ import { Item } from './item';
 export class ShoppingCartService {
 
   public itemsInCart: WritableSignal<Item[]> = signal([]);
-  public totalItemQty: Signal<number> = computed(() => this.itemsInCart().length);
+  public totalItemQty: Signal<number> = computed(() => this.itemsInCart().reduce((total, item) => total + item.quantity, 0));
   public totalItemCost: Signal<number> = computed(() => this.itemsInCart().reduce((total, item) => total + (item.cost * item.quantity), 0));
 
   public addItem(itemToAdd: Item): void {
